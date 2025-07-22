@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jyothirmai N - Data Analyst / Data Scientist Portfolio</title>
+    <!-- Load Tailwind CSS from CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Inter font from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Basic styles for smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+        /* Fade-in animation for Hero section content */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-up {
+            animation: fadeIn 1s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="dark bg-gradient-to-br from-slate-950 via-gray-900 to-black text-gray-100">
+    <div id="root"></div>
+
+    <script type="module">
+        import React, { useState, useEffect } from 'https://esm.sh/react@18.2.0';
+        import ReactDOM from 'https://esm.sh/react-dom@18.2.0/client';
+        // Importing Lucide React icons directly
+        import {
+            Github, Linkedin, Mail, Download, Database, Code, BarChart, Table, Phone, Search, LayoutDashboard, Sigma, Cloud, Sun, Moon, Briefcase, Award, GraduationCap, Lightbulb, User, FolderDot, GitPullRequestDraft, MessageSquare, Brain, Eye
+        } from 'https://esm.sh/lucide-react@0.395.0';
+
+        // Main App Component
+        const App = () => {
+            const [theme, setTheme] = useState('dark'); // 'dark' or 'light'
+
+            // Function to toggle theme
+            const toggleTheme = () => {
+                setTheme(prevTheme => (prevTheme === 'dark' ? 'light' : 'dark'));
+            };
+
+            // Apply theme classes to body
+            useEffect(() => {
+                const body = document.body;
+                if (theme === 'dark') {
+                    body.classList.add('dark');
+                    body.classList.remove('light');
+                } else {
+                    body.classList.add('light');
+                    body.classList.remove('dark');
+                }
+                body.style.fontFamily = "'Inter', sans-serif";
+            }, [theme]);
+
+            // Define colors based on theme
+            const bgColor = theme === 'dark' ? 'bg-gradient-to-br from-slate-950 via-gray-900 to-black' : 'bg-gradient-to-br from-blue-50 via-indigo-100 to-purple-50';
+            const textColor = theme === 'dark' ? 'text-gray-100' : 'text-gray-800';
+            const cardBg = theme === 'dark' ? 'bg-gray-800/70' : 'bg-white/80';
+            const accentColor = theme === 'dark' ? 'text-sky-400' : 'text-blue-600';
+            const hoverBg = theme === 'dark' ? 'hover:bg-gray-700' : 'hover:bg-gray-100';
+            const borderColor = theme === 'dark' ? 'border-gray-700' : 'border-gray-200';
+
+            // Project data
+            const projects = [
+                {
+                    id: 1,
+                    name: 'Call Center Performance Dashboard',
+                    tools: 'Power BI, SQL',
+                    description: 'Developed a comprehensive dashboard to monitor key call center metrics including Service Level Agreement (SLA), call volumes, and agent KPIs. Implemented SQL queries for data extraction and transformation, and utilized Power BI for interactive visualizations, providing actionable insights into routing logic and operational efficiency.',
+                    metrics: 'SLA, Call Volumes, Agent KPIs, Routing Logic',
+                    downloadLink: '#', // Placeholder link
+                    image: 'https://placehold.co/600x400/000000/FFFFFF?text=Dashboard+Mockup+1',
+                },
+                {
+                    id: 2,
+                    name: 'Gold & Silver Price Trend Analysis (10 years)',
+                    tools: 'Python, Pandas, Matplotlib',
+                    description: 'Conducted an in-depth analysis of gold and silver price trends over a decade using Python. Leveraged Pandas for data manipulation and Matplotlib for visualizing historical price movements, identifying key patterns and potential future trends. This project showcases data cleaning, analysis, and visualization skills.',
+                    metrics: 'Historical Price Trends, Volatility, Correlation',
+                    downloadLink: '#', // Placeholder link
+                    image: 'https://placehold.co/600x400/000000/FFFFFF?text=Analysis+Chart+Mockup+2',
+                },
+                {
+                    id: 3,
+                    name: 'Stock Market Price Prediction (Nifty 50, Bank Nifty, Sensex)',
+                    tools: 'Linear Regression, ARIMA, LSTM (future enhancement plan)',
+                    description: 'Explored various machine learning models for predicting stock market prices (Nifty 50, Bank Nifty, Sensex). Implemented Linear Regression and ARIMA models, with plans for future enhancement using LSTM networks. This project demonstrates foundational knowledge in predictive modeling and time series analysis.',
+                    metrics: 'Prediction Accuracy, Model Performance',
+                    downloadLink: '#', // Placeholder link
+                    image: 'https://placehold.co/600x400/000000/FFFFFF?text=Prediction+Model+Mockup+3',
+                },
+                {
+                    id: 4,
+                    name: 'COVID-19 Analysis using SQL',
+                    tools: 'SQL, Power BI',
+                    description: 'Performed a detailed analysis of COVID-19 data using SQL for data extraction and aggregation. Created insightful visualizations in Power BI to present key trends, case distributions, and mortality rates, showcasing proficiency in database querying and data storytelling.',
+                    metrics: 'Case Trends, Mortality Rates, Regional Impact',
+                    downloadLink: '#', // Placeholder link
+                    image: 'https://placehold.co/600x400/000000/FFFFFF?text=COVID-19+Visuals+Mockup+4',
+                },
+            ];
+
+            // Categorized Skills Data
+            const skillCategories = [
+                {
+                    name: 'Programming Languages',
+                    icon: Code,
+                    skills: [
+                        'Python (Pandas, NumPy)',
+                        'SQL (PostgreSQL, MySQL, MS SQL Server)',
+                        'R (ggplot2, dplyr) - Basic',
+                    ]
+                },
+                {
+                    name: 'Data Visualization',
+                    icon: BarChart,
+                    skills: [
+                        'Power BI',
+                        'Basic Tableau',
+                        'Matplotlib, Seaborn (Python)',
+                        'ggplot2 (R)',
+                    ]
+                },
+                {
+                    name: 'Databases & Tools',
+                    icon: Database,
+                    skills: [
+                        'SQL',
+                        'Microsoft Excel',
+                        'CUIC',
+                        'Regex',
+                        'REST API Concepts',
+                        'Jupyter Notebooks',
+                    ]
+                },
+                {
+                    name: 'Statistical Analysis',
+                    icon: Sigma,
+                    skills: [
+                        'Statistics (General)',
+                        'Hypothesis Testing',
+                        'Regression Analysis',
+                        'A/B Testing',
+                        'Time Series Analysis',
+                    ]
+                },
+                {
+                    name: 'Machine Learning Basics',
+                    icon: Brain,
+                    skills: [
+                        'Linear Regression',
+                        'ARIMA',
+                        'LSTM (Conceptual)',
+                        'Clustering',
+                        'Classification',
+                        'Regression Models',
+                    ]
+                },
+                {
+                    name: 'Soft Skills',
+                    icon: MessageSquare,
+                    skills: [
+                        'Problem Solving',
+                        'Communication',
+                        'Critical Thinking',
+                        'Attention to Detail',
+                    ]
+                },
+            ];
+
+            return React.createElement('div', { className: `min-h-screen ${bgColor} ${textColor} transition-colors duration-500` },
+                // Theme Toggle Button
+                React.createElement('button', {
+                    onClick: toggleTheme,
+                    className: `fixed top-4 right-4 p-3 rounded-full shadow-lg z-50 transition-all duration-300
+                        ${theme === 'dark' ? 'bg-sky-600 text-white hover:bg-sky-700' : 'bg-blue-200 text-blue-800 hover:bg-blue-300'}`,
+                    'aria-label': 'Toggle theme'
+                },
+                    theme === 'dark' ? React.createElement(Sun, { size: 20 }) : React.createElement(Moon, { size: 20 })
+                ),
+
+                // Header/Navigation
+                React.createElement('header', { className: `py-6 px-4 md:px-8 lg:px-16 flex justify-between items-center sticky top-0 z-40 ${cardBg} bg-opacity-90 backdrop-blur-md border-b ${borderColor} shadow-lg` },
+                    React.createElement('div', { className: 'text-2xl font-bold' },
+                        React.createElement('span', { className: accentColor }, 'Jyothirmai N')
+                    ),
+                    React.createElement('nav', { className: 'flex flex-wrap justify-center gap-x-8 gap-y-4 text-lg font-medium' },
+                        React.createElement('a', { href: '#about', className: `hover:${accentColor} transition-colors duration-300` }, 'About Me'),
+                        React.createElement('a', { href: '#skills', className: `hover:${accentColor} transition-colors duration-300` }, 'Skills'),
+                        React.createElement('a', { href: '#projects', className: `hover:${accentColor} transition-colors duration-300` }, 'Projects'),
+                        React.createElement('a', { href: '#certifications', className: `hover:${accentColor} transition-colors duration-300` }, 'Certifications'),
+                        React.createElement('a', { href: '#resume', className: `hover:${accentColor} transition-colors duration-300` }, 'Resume'),
+                        React.createElement('a', { href: '#contact', className: `hover:${accentColor} transition-colors duration-300` }, 'Contact')
+                    )
+                ),
+
+                React.createElement('main', { className: 'container mx-auto px-4 md:px-8 lg:px-16 py-12 space-y-24' },
+
+                    // Hero Section / About Me Intro
+                    React.createElement('section', { id: 'hero', className: 'flex flex-col items-center justify-center text-center min-h-[calc(100vh-100px)] py-16' },
+                        React.createElement('div', { className: 'animate-fade-in-up' },
+                            React.createElement('h1', { className: 'text-5xl md:text-7xl font-extrabold mb-2 leading-tight' },
+                                'Hello, I\'m ',
+                                React.createElement('span', { className: `${accentColor} drop-shadow-lg` }, 'Jyothirmai N')
+                            ),
+                            React.createElement('p', { className: 'text-xl md:text-2xl max-w-3xl mx-auto mb-8 leading-relaxed' },
+                                'A passionate Data Analyst, I leverage 5+ years of robust IT experience from my background as a ',
+                                React.createElement('span', { className: 'font-semibold' }, 'Cisco Voice Engineer & System Administrator'),
+                                ' to transform complex data into actionable insights.'
+                            ),
+                            React.createElement('a', {
+                                href: '#projects',
+                                className: `inline-flex items-center px-8 py-4 rounded-full text-lg font-semibold shadow-xl transition-all duration-300
+                                    ${theme === 'dark' ? 'bg-sky-600 text-white hover:bg-sky-700' : 'bg-blue-600 text-white hover:bg-blue-700'}
+                                    transform hover:scale-105`
+                            },
+                                'Explore My Work ',
+                                React.createElement(FolderDot, { className: 'ml-2', size: 20 })
+                            )
+                        )
+                    ),
+
+                    // About Me Section - Now focused on narrative
+                    React.createElement('section', { id: 'about', className: 'py-16 scroll-mt-24' },
+                        React.createElement('h2', { className: `text-4xl font-bold text-center mb-12 ${textColor}` }, 'About Me'),
+                        React.createElement('div', { className: `max-w-4xl mx-auto p-8 rounded-3xl shadow-xl ${cardBg} border ${borderColor}` },
+                            React.createElement('p', { className: 'text-lg leading-relaxed mb-6' },
+                                'With over 5 years of experience at TCS as a Cisco Voice Engineer and System Administrator, I\'ve honed my problem-solving, analytical, and technical skills in complex IT environments. My passion for data-driven insights has led me to pivot my career towards Data Analytics and Data Science.'
+                            ),
+                            React.createElement('p', { className: 'text-lg leading-relaxed' },
+                                'I am actively building a strong foundation in data analysis methodologies, statistical concepts, and machine learning techniques, eager to apply my diverse background to extract meaningful insights and drive strategic decisions.'
+                            )
+                        )
+                    ),
+
+                    // New Skills & Expertise Section
+                    React.createElement('section', { id: 'skills', className: 'py-16 scroll-mt-24' },
+                        React.createElement('h2', { className: `text-4xl font-bold text-center mb-12 ${textColor}` }, 'Skills & Expertise'),
+                        React.createElement('div', { className: `max-w-6xl mx-auto p-8 rounded-3xl shadow-xl ${cardBg} border ${borderColor}` },
+                            React.createElement('div', { className: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8' },
+                                skillCategories.map((category, index) => (
+                                    React.createElement('div', { key: index, className: `p-6 rounded-lg ${cardBg} border ${borderColor} shadow-md transition-transform duration-300 ${hoverBg}` },
+                                        React.createElement('h4', { className: `text-xl font-semibold mb-3 flex items-center ${accentColor}` },
+                                            category.icon && React.createElement(category.icon, { size: 20, className: 'mr-2' }),
+                                            category.name
+                                        ),
+                                        React.createElement('ul', { className: 'list-disc list-inside space-y-1 text-base opacity-90' },
+                                            category.skills.map((skill, sIndex) => (
+                                                React.createElement('li', { key: sIndex }, skill)
+                                            ))
+                                        )
+                                    )
+                                ))
+                            )
+                        )
+                    ),
+
+                    // Certifications Section
+                    React.createElement('section', { id: 'certifications', className: 'py-16 scroll-mt-24' },
+                        React.createElement('h2', { className: `text-4xl font-bold text-center mb-12 ${accentColor}` }, 'Certifications'),
+                        React.createElement('div', { className: `grid grid-cols-1 md:grid-cols-3 gap-8 p-8 rounded-3xl shadow-xl ${cardBg} border ${borderColor}` },
+                            React.createElement('div', { className: `flex flex-col items-center text-center p-6 rounded-lg ${hoverBg} transition-transform duration-300 hover:scale-105` },
+                                React.createElement('img', { src: 'https://placehold.co/100x100/A78BFA/FFFFFF?text=Google', alt: 'Google Data Analytics Logo', className: 'w-24 h-24 mb-4 rounded-full object-cover' }),
+                                React.createElement('h3', { className: 'text-xl font-semibold mb-2' }, 'Google Data Analytics'),
+                                React.createElement('p', { className: 'text-sm opacity-80' }, 'Comprehensive training in data analysis tools and techniques.')
+                            ),
+                            React.createElement('div', { className: `flex flex-col items-center text-center p-6 rounded-lg ${hoverBg} transition-transform duration-300 hover:scale-105` },
+                                React.createElement('img', { src: 'https://placehold.co/100x100/6366F1/FFFFFF?text=Microsoft', alt: 'Microsoft PL-300 Logo', className: 'w-24 h-24 mb-4 rounded-full object-cover' }),
+                                React.createElement('h3', { className: 'text-xl font-semibold mb-2' }, 'Microsoft PL-300 (Power BI)'),
+                                React.createElement('p', { className: 'text-sm opacity-80' }, 'Certified in designing and building scalable data models with Power BI.')
+                            ),
+                            React.createElement('div', { className: `flex flex-col items-center text-center p-6 rounded-lg ${hoverBg} transition-transform duration-300 hover:scale-105` },
+                                React.createElement('img', { src: 'https://placehold.co/100x100/F97316/FFFFFF?text=SEBI', alt: 'SEBI Logo', className: 'w-24 h-24 mb-4 rounded-full object-cover' }),
+                                React.createElement('h3', { className: 'text-xl font-semibold mb-2' }, 'SEBI Investor Certification'),
+                                React.createElement('p', { className: 'text-sm opacity-80' }, 'Understanding of financial markets and investor protection.')
+                            )
+                        )
+                    ),
+
+                    // Projects Section
+                    React.createElement('section', { id: 'projects', className: 'py-16 scroll-mt-24' },
+                        React.createElement('h2', { className: `text-4xl font-bold text-center mb-12 ${accentColor}` }, 'My Projects'),
+                        React.createElement('div', { className: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10' },
+                            projects.map(project => (
+                                React.createElement('div', { key: project.id, className: `rounded-3xl shadow-xl overflow-hidden transition-transform duration-300 hover:scale-[1.02] ${cardBg} border ${borderColor}` },
+                                    React.createElement('img', { src: project.image, alt: project.name, className: 'w-full h-60 object-cover object-center border-b border-gray-700' }),
+                                    React.createElement('div', { className: 'p-8' },
+                                        React.createElement('h3', { className: 'text-3xl font-bold mb-4' }, project.name),
+                                        React.createElement('p', { className: 'text-base mb-4 opacity-80' }, project.description),
+                                        React.createElement('div', { className: 'mb-4' },
+                                            React.createElement('p', { className: `font-semibold flex items-center mb-2` },
+                                                React.createElement(Code, { className: `mr-2 ${accentColor}`, size: 18 }),
+                                                'Tools: ',
+                                                React.createElement('span', { className: 'ml-2 font-normal' }, project.tools)
+                                            ),
+                                            React.createElement('p', { className: `font-semibold flex items-center` },
+                                                React.createElement(BarChart, { className: `mr-2 ${accentColor}`, size: 18 }),
+                                                'Key Metrics: ',
+                                                React.createElement('span', { className: 'ml-2 font-normal' }, project.metrics)
+                                            )
+                                        ),
+                                        React.createElement('a', {
+                                            href: project.downloadLink,
+                                            target: '_blank',
+                                            rel: 'noopener noreferrer',
+                                            className: `inline-flex items-center px-6 py-3 rounded-full text-base font-semibold transition-all duration-300
+                                                ${theme === 'dark' ? 'bg-sky-600 text-white hover:bg-sky-700' : 'bg-blue-600 text-white hover:bg-blue-700'}
+                                                transform hover:scale-105`
+                                        },
+                                            'Download/View ',
+                                            React.createElement(Download, { className: 'ml-2', size: 18 })
+                                        )
+                                    )
+                                )
+                            ))
+                        )
+                    ),
+
+                    // Resume Download Section
+                    React.createElement('section', { id: 'resume', className: 'py-16 scroll-mt-24' },
+                        React.createElement('h2', { className: `text-4xl font-bold text-center mb-8 ${accentColor}` }, 'Download My Resume'),
+                        React.createElement('p', { className: 'text-lg max-w-2xl mx-auto mb-8 text-center' },
+                            'Access my detailed professional experience, skills, and achievements.'
+                        ),
+                        React.createElement('div', { className: 'flex justify-center' },
+                            React.createElement('a', {
+                                href: 'https://example.com/your-resume.pdf', // Placeholder link
+                                target: '_blank',
+                                rel: 'noopener noreferrer',
+                                className: `inline-flex items-center px-10 py-5 rounded-full text-xl font-semibold shadow-xl transition-all duration-300
+                                    ${theme === 'dark' ? 'bg-sky-600 text-white hover:bg-sky-700' : 'bg-blue-600 text-white hover:bg-blue-700'}
+                                    transform hover:scale-105`
+                            },
+                                'Download Resume ',
+                                React.createElement(Download, { className: 'ml-3', size: 24 })
+                            )
+                        )
+                    ),
+
+                    // Contact Me Section
+                    React.createElement('section', { id: 'contact', className: 'py-16 scroll-mt-24' },
+                        React.createElement('h2', { className: `text-4xl font-bold text-center mb-12 ${accentColor}` }, 'Contact Me'),
+                        React.createElement('div', { className: `max-w-3xl mx-auto p-8 rounded-3xl shadow-xl ${cardBg} border ${borderColor}` },
+                            React.createElement('form', { className: 'space-y-6' },
+                                React.createElement('div', null,
+                                    React.createElement('label', { htmlFor: 'name', className: 'block text-lg font-medium mb-2' }, 'Name'),
+                                    React.createElement('input', {
+                                        type: 'text',
+                                        id: 'name',
+                                        name: 'name',
+                                        className: `w-full p-3 rounded-lg border ${borderColor} focus:ring-2 ${theme === 'dark' ? 'bg-gray-700 text-gray-100 focus:ring-sky-500' : 'bg-white text-gray-800 focus:ring-blue-500'}`,
+                                        placeholder: 'Your Name'
+                                    })
+                                ),
+                                React.createElement('div', null,
+                                    React.createElement('label', { htmlFor: 'email', className: 'block text-lg font-medium mb-2' }, 'Email'),
+                                    React.createElement('input', {
+                                        type: 'email',
+                                        id: 'email',
+                                        name: 'email',
+                                        className: `w-full p-3 rounded-lg border ${borderColor} focus:ring-2 ${theme === 'dark' ? 'bg-gray-700 text-gray-100 focus:ring-sky-500' : 'bg-white text-gray-800 focus:ring-blue-500'}`,
+                                        placeholder: 'your.email@example.com'
+                                    })
+                                ),
+                                React.createElement('div', null,
+                                    React.createElement('label', { htmlFor: 'message', className: 'block text-lg font-medium mb-2' }, 'Message'),
+                                    React.createElement('textarea', {
+                                        id: 'message',
+                                        name: 'message',
+                                        rows: '5',
+                                        className: `w-full p-3 rounded-lg border ${borderColor} focus:ring-2 ${theme === 'dark' ? 'bg-gray-700 text-gray-100 focus:ring-sky-500' : 'bg-white text-gray-800 focus:ring-blue-500'}`,
+                                        placeholder: 'Your message...'
+                                    })
+                                ),
+                                React.createElement('button', {
+                                    type: 'submit',
+                                    className: `w-full px-6 py-3 rounded-full text-lg font-semibold shadow-md transition-all duration-300
+                                        ${theme === 'dark' ? 'bg-sky-600 text-white hover:bg-sky-700' : 'bg-blue-600 text-white hover:bg-blue-700'}
+                                        transform hover:scale-105`
+                                }, 'Send Message')
+                            ),
+
+                            React.createElement('div', { className: 'mt-10 text-center' },
+                                React.createElement('p', { className: 'text-xl font-semibold mb-4' }, 'Connect with me:'),
+                                React.createElement('div', { className: 'flex justify-center space-x-6' },
+                                    React.createElement('a', {
+                                        href: 'https://www.linkedin.com/in/jyothirmai-n', // Placeholder link
+                                        target: '_blank',
+                                        rel: 'noopener noreferrer',
+                                        className: `p-4 rounded-full shadow-lg transition-all duration-300 ${cardBg} ${hoverBg} border ${borderColor} transform hover:scale-110`,
+                                        'aria-label': 'LinkedIn profile'
+                                    },
+                                        React.createElement(Linkedin, { size: 30, className: accentColor })
+                                    ),
+                                    React.createElement('a', {
+                                        href: 'https://github.com/your-github-profile', // Placeholder link
+                                        target: '_blank',
+                                        rel: 'noopener noreferrer',
+                                        className: `p-4 rounded-full shadow-lg transition-all duration-300 ${cardBg} ${hoverBg} border ${borderColor} transform hover:scale-110`,
+                                        'aria-label': 'GitHub profile'
+                                    },
+                                        React.createElement(Github, { size: 30, className: accentColor })
+                                    ),
+                                    React.createElement('a', {
+                                        href: 'mailto:your.email@example.com', // Placeholder link
+                                        className: `p-4 rounded-full shadow-lg transition-all duration-300 ${cardBg} ${hoverBg} border ${borderColor} transform hover:scale-110`,
+                                        'aria-label': 'Email me'
+                                    },
+                                        React.createElement(Mail, { size: 30, className: accentColor })
+                                    )
+                                )
+                            )
+                        )
+                    )
+                ),
+
+                // Footer
+                React.createElement('footer', { className: `py-8 text-center text-sm opacity-70 ${cardBg} border-t ${borderColor}` },
+                    React.createElement('p', null, `© ${new Date().getFullYear()} Jyothirmai N. All rights reserved.`),
+                    React.createElement('p', null, 'Designed and Developed with ', React.createElement('span', { className: 'text-red-500' }, '♥'))
+                )
+            );
+        };
+
+        // Render the App component into the #root div
+        ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(App, null));
+    </script>
+</body>
+</html>
